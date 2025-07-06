@@ -1,0 +1,294 @@
+# =======================================
+# STREAMIX MICROSERVICES GITIGNORE
+# =======================================
+
+# Build outputs
+.gradle/
+build/
+target/
+!gradle/wrapper/gradle-wrapper.jar
+!**/src/main/**/build/
+!**/src/test/**/build/
+!**/src/main/**/target/
+!**/src/test/**/target/
+
+# =======================================
+# Java
+# =======================================
+*.class
+*.jar
+*.war
+*.nar
+*.ear
+*.zip
+*.tar.gz
+*.rar
+hs_err_pid*
+replay_pid*
+
+# =======================================
+# Spring Boot
+# =======================================
+.springBeans
+.sts4-cache
+bin/
+!**/src/main/**/bin/
+!**/src/test/**/bin/
+
+# =======================================
+# Maven
+# =======================================
+pom.xml.tag
+pom.xml.releaseBackup
+pom.xml.versionsBackup
+pom.xml.next
+release.properties
+dependency-reduced-pom.xml
+buildNumber.properties
+.mvn/timing.properties
+.mvn/wrapper/maven-wrapper.jar
+
+# =======================================
+# Gradle
+# =======================================
+.gradle
+**/build/
+!src/**/build/
+gradle-app.setting
+!gradle-wrapper.jar
+!gradle-wrapper.properties
+.gradletasknamecache
+
+# =======================================
+# IDEs
+# =======================================
+
+### IntelliJ IDEA ###
+.idea/
+*.iws
+*.iml
+*.ipr
+out/
+!**/src/main/**/out/
+!**/src/test/**/out/
+
+### Eclipse ###
+.apt_generated
+.classpath
+.factorypath
+.project
+.settings
+.springBeans
+.sts4-cache
+bin/
+tmp/
+*.tmp
+*.bak
+*.swp
+*~.nib
+local.properties
+.loadpath
+.recommenders
+
+### NetBeans ###
+/nbproject/private/
+/nbbuild/
+/dist/
+/nbdist/
+/.nb-gradle/
+
+### VS Code ###
+.vscode/
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+
+# =======================================
+# Operating System
+# =======================================
+
+### Windows ###
+Thumbs.db
+Thumbs.db:encryptable
+ehthumbs.db
+ehthumbs_vista.db
+*.stackdump
+[Dd]esktop.ini
+$RECYCLE.BIN/
+*.cab
+*.msi
+*.msix
+*.msm
+*.msp
+*.lnk
+
+### macOS ###
+.DS_Store
+.AppleDouble
+.LSOverride
+Icon
+._*
+.DocumentRevisions-V100
+.fseventsd
+.Spotlight-V100
+.TemporaryItems
+.Trashes
+.VolumeIcon.icns
+.com.apple.timemachine.donotpresent
+.AppleDB
+.AppleDesktop
+Network Trash Folder
+Temporary Items
+.apdisk
+
+### Linux ###
+*~
+.fuse_hidden*
+.directory
+.Trash-*
+.nfs*
+
+# =======================================
+# Logs and Databases
+# =======================================
+logs/
+*.log
+*.log.*
+*.out
+*.pid
+*.seed
+*.gz
+*.tgz
+
+# Database files
+*.db
+*.sqlite
+*.sqlite3
+*.db-journal
+
+# H2 Database files
+*.h2.db
+*.h2.trace.db
+*.h2.lock.db
+
+# =======================================
+# Configuration and Environment
+# =======================================
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+*.properties.local
+*-local.properties
+*-local.yml
+*-local.yaml
+application-local.properties
+application-local.yml
+application-local.yaml
+
+# Secret files
+*.key
+*.pem
+*.p12
+*.jks
+*.keystore
+*.truststore
+secrets/
+credentials/
+
+# =======================================
+# Docker
+# =======================================
+Dockerfile.local
+docker-compose.local.yml
+docker-compose.override.yml
+.dockerignore.local
+
+# =======================================
+# Testing
+# =======================================
+test-results/
+test-output/
+coverage/
+*.coverage
+.nyc_output
+.pytest_cache/
+.coverage
+htmlcov/
+.tox/
+.cache
+nosetests.xml
+coverage.xml
+*.cover
+.hypothesis/
+
+# =======================================
+# Temporary files
+# =======================================
+*.tmp
+*.temp
+*.cache
+.cache/
+tmp/
+temp/
+scratch/
+*.backup
+*.bak
+*.orig
+
+# =======================================
+# Documentation
+# =======================================
+HELP.md
+docs/generated/
+.asciidoctor/
+
+# =======================================
+# Microservices specific
+# =======================================
+# Service discovery temporary files
+eureka-server/logs/
+eureka-server/tmp/
+
+# API Gateway logs
+api-gateway/logs/
+
+# Each service's specific temporary files
+**/logs/
+**/tmp/
+**/temp/
+**/cache/
+
+# Distributed tracing files
+jaeger-*/
+zipkin-*/
+
+# =======================================
+# Package managers
+# =======================================
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+package-lock.json
+yarn.lock
+
+# =======================================
+# Misc
+# =======================================
+*.pid
+*.seed
+*.pid.lock
+.npm
+.node_repl_history
+.yarn-integrity
+.parcel-cache
+.next
+.nuxt
+.vuepress/dist
+.serverless/
+.fusebox/
+.dynamodb/
+.tern-port
