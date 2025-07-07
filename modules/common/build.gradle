@@ -1,0 +1,13 @@
+dependencies {
+
+}
+
+// This is a library, not an executable application
+jar {
+    enabled = true
+    archiveClassifier = ''
+}
+
+bootJar {
+    enabled = false
+} 
