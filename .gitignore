@@ -292,3 +292,6 @@ yarn.lock
 .fusebox/
 .dynamodb/
 .tern-port
+
+gradlew
+gradlew.bat
