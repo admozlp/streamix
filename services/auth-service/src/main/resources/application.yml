@@ -5,9 +5,14 @@ spring:
   application:
     name: auth-service
 
+### Eureka Configuration ###
 eureka:
-  client:
-    service-url:
-      defaultZone: http://localhost:8761/eureka/
   instance:
-    prefer-ip-address: true
+    preferIpAddress: true
+    instanceId: ${spring.application.name}:${random.value}
+  client:
+    serviceUrl:
+      defaultZone: ${EUREKA_URI:http://localhost:8761/eureka/}
+    registry-fetch-interval-seconds: 5
+
+

@@ -39,7 +39,7 @@ subprojects {
         implementation 'org.springframework.boot:spring-boot-starter-actuator'
 
         // Development Tools
-        developmentOnly 'org.springframework.boot:spring-boot-devtools'
+//        developmentOnly 'org.springframework.boot:spring-boot-devtools'
         annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor'
 
         // Testing

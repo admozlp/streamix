@@ -4,9 +4,11 @@ include 'streamix-common'
 include 'eureka-service'
 include 'user-service'
 include 'auth-service'
+include 'apigw-service'
 
 // Module Path Configuration
 project(':streamix-common').projectDir = file('modules/common')
 project(':eureka-service').projectDir = file('services/eureka-service')
 project(':user-service').projectDir = file('services/user-service')
 project(':auth-service').projectDir = file('services/auth-service')
+project(':apigw-service').projectDir = file('services/apigw-service')
