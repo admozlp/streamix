@@ -1,5 +1,5 @@
 dependencies {
-
+    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
 }
 
 // This is a library, not an executable application

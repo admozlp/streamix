@@ -1,0 +1,29 @@
+ext {
+    versions = [
+            springBoot             : "3.4.0",
+            lombok                 : "1.18.36",
+            swagger                : "2.7.0",
+            springCloudVersion     : "2024.0.0",
+            swaggerWebflux         : "1.8.0",
+            "junitPlatformLauncher": "1.11.3"
+    ]
+
+    libs = [
+            springBootWeb        : "org.springframework.boot:spring-boot-starter-web:$versions.springBoot",
+            springBootValidation : "org.springframework.boot:spring-boot-starter-validation:$versions.springBoot",
+            jpa                  : "org.springframework.boot:spring-boot-starter-data-jpa:$versions.springBoot",
+            postgresql           : "org.postgresql:postgresql",
+            elasticsearch        : "org.springframework.boot:spring-boot-starter-data-elasticsearch",
+            swagger              : "org.springdoc:springdoc-openapi-starter-webmvc-ui:$versions.swagger",
+            lombok               : "org.projectlombok:lombok:$versions.lombok",
+            actuator             : "org.springframework.boot:spring-boot-starter-actuator",
+            swaggerWebflux       : "org.springdoc:springdoc-openapi-webflux-ui:$versions.swaggerWebflux",
+            apiGateway           : "org.springframework.cloud:spring-cloud-starter-gateway",
+            springCloud          : "org.springframework.cloud:spring-cloud-dependencies:${versions.springCloudVersion}",
+            eurekaClient         : "org.springframework.cloud:spring-cloud-starter-netflix-eureka-client",
+            eurekaServer         : "org.springframework.cloud:spring-cloud-starter-netflix-eureka-server",
+            vaultConfig          : "org.springframework.cloud:spring-cloud-starter-vault-config",
+            junitPlatformLauncher: "org.junit.platform:junit-platform-launcher:$versions.junitPlatformLauncher",
+            springBootStarterTest: "org.springframework.boot:spring-boot-starter-test:$versions.springBoot",
+    ]
+}
