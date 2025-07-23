@@ -1,4 +1,4 @@
-package com.streamix.user.util;
+package com.streamix.user.security;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.JwtException;
@@ -42,8 +42,6 @@ public class JwtUtil {
         this.key = Keys.hmacShaKeyFor(keyBytes);
         logger.info("JWT Util initialized successfully");
     }
-
-    // ==================== TOKEN GENERATION ====================
 
     public String generateToken(UserDetails userDetails) {
         Map<String, Object> claims = new HashMap<>();

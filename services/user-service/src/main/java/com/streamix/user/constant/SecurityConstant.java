@@ -1,13 +1,13 @@
 package com.streamix.user.constant;
 
-public class SecurityConstants {
+public class SecurityConstant {
 
-    private SecurityConstants() {
+    private SecurityConstant() {
     }
 
     public static final String[] PUBLIC_ENDPOINTS = {
-//            "/users/register",
-            "/users/hello",
+            "/users/register",
+            "/users/login",
             "/actuator/**",
             "/h2-console/**"
     };
