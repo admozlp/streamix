@@ -1,8 +1,7 @@
 package com.streamix.user.exception;
 
 import com.streamix.common.exception.NotFoundException;
-import com.streamix.common.constant.ResponseCodeConstant;
-import com.streamix.user.util.ApiResponse;
+import com.streamix.common.util.ApiResponse;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.BadCredentialsException;
@@ -19,8 +18,6 @@ public class GlobalExceptionHandler {
 
     @ExceptionHandler(BadCredentialsException.class)
     public ResponseEntity<ApiResponse<Void>> handleBadCredentialsException(BadCredentialsException ex) {
-        return new ResponseEntity<>(ApiResponse.error(ResponseCodeConstant.INVALID_CREDENTIALS, "Invalid email or password"),
-                HttpStatus.UNAUTHORIZED
-        );
+        return new ResponseEntity<>(ApiResponse.error("Invalid email or password", HttpStatus.UNAUTHORIZED), HttpStatus.UNAUTHORIZED);
     }
 }

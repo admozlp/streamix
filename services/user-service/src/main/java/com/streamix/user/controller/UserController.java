@@ -1,15 +1,16 @@
 package com.streamix.user.controller;
 
+import com.streamix.common.util.ApiResponse;
 import com.streamix.user.dto.LoginRequest;
+import com.streamix.user.dto.LoginResponse;
 import com.streamix.user.dto.UserRegisterRequest;
+import com.streamix.user.dto.UserResponse;
 import com.streamix.user.service.UserService;
-import com.streamix.user.util.ApiResponse;
 import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.Authentication;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/users")
@@ -22,15 +23,20 @@ public class UserController {
     }
 
     @PostMapping("/register")
-    public ResponseEntity<ApiResponse<Void>> register(@RequestBody @Valid UserRegisterRequest request) {
-        service.register(request);
-        return ResponseEntity.ok(ApiResponse.success("User registered successfully"));
+    public ResponseEntity<ApiResponse<UserResponse>> register(@RequestBody @Valid UserRegisterRequest request) {
+        return ResponseEntity.ok(ApiResponse.success(service.register(request), "User registered successfully"));
     }
 
     @PostMapping("/login")
-    public ResponseEntity<ApiResponse<String>> login(@RequestBody @Valid LoginRequest request) {
-        String token = service.login(request);
-        return ResponseEntity.ok(ApiResponse.success(token, "Login successful"));
+    public ResponseEntity<ApiResponse<LoginResponse>> login(@RequestBody @Valid LoginRequest request) {
+        return ResponseEntity.ok(ApiResponse.success(service.login(request), "Successfully Login"));
+    }
+
+    @GetMapping("/private-test")
+    @PreAuthorize(" hasRole('ROLE_USER') ")
+    public void privateTest(Authentication authentication) {
+        String username = authentication.getName();
+        System.out.println("Private test accessed by user: " + username);
     }
 
 }

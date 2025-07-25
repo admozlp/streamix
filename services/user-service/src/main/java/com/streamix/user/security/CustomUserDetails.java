@@ -26,7 +26,8 @@ public class CustomUserDetails implements UserDetails {
         List<String> privileges = new ArrayList<>();
         List<Privilege> collection = new ArrayList<>();
         for (Role role : roles) {
-            privileges.add(role.getName());
+            // Add role with ROLE_ prefix for Spring Security hasRole() method
+            privileges.add("ROLE_" + role.getName());
             collection.addAll(role.getPrivileges());
         }
         for (Privilege item : collection) {

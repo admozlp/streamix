@@ -12,7 +12,7 @@ public class NotFoundException extends RuntimeException {
         this.message = message;
     }
 
-    public NotFoundException(String code, String message) {
+    public NotFoundException(String message, String code) {
         super(message);
         this.message = message;
         this.code = code;

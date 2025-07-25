@@ -1,6 +1,6 @@
 package com.streamix.user.security;
 
-import com.streamix.user.UserConverter;
+import com.streamix.user.converter.UserConverter;
 import com.streamix.user.model.User;
 import com.streamix.user.service.UserService;
 import org.springframework.context.annotation.Lazy;

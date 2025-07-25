@@ -1,7 +1,3 @@
-// =======================================
-// STREAMIX PARENT PROJECT - BASIC VERSION
-// =======================================
-
 plugins {
     id 'java-platform'
     id 'org.springframework.boot' version '3.4.0' apply false

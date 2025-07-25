@@ -12,5 +12,5 @@ public class SecurityConstant {
             "/h2-console/**"
     };
 
-    public static final String ROLE_HIERARCHY = "ROLE_ADMIN > ROLE_STAFF \n ROLE_STAFF > ROLE_USER";
+    public static final String ROLE_HIERARCHY = "ROLE_ADMIN > ROLE_MODERATOR \n ROLE_MODERATOR > ROLE_USER";
 } 

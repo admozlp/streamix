@@ -14,7 +14,6 @@ public class User extends BaseEntity {
     private String password;
     private String name;
     private boolean enabled = true;
-    private boolean tokenExpired = false;
 
     @ManyToMany
     @JoinTable(name = USER_ROLES,
@@ -62,14 +61,6 @@ public class User extends BaseEntity {
 
     public void setEnabled(boolean enabled) {
         this.enabled = enabled;
-    }
-
-    public boolean isTokenExpired() {
-        return tokenExpired;
-    }
-
-    public void setTokenExpired(boolean tokenExpired) {
-        this.tokenExpired = tokenExpired;
     }
 
     public List<Role> getRoles() {

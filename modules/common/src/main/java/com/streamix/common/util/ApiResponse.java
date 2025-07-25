@@ -1,4 +1,4 @@
-package com.streamix.user.util;
+package com.streamix.common.util;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -85,7 +85,7 @@ public class ApiResponse<T> {
         return response;
     }
 
-    public static <T> ApiResponse<T> error(HttpStatus status, String message) {
+    public static <T> ApiResponse<T> error(String message, HttpStatus status) {
         ApiResponse<T> response = new ApiResponse<>(false, null, null);
         response.error = new ErrorDetails(status.name(), message);
         return response;
