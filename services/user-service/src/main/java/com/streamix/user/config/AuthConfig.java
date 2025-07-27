@@ -1,6 +1,8 @@
 package com.streamix.user.config;
 
 import com.streamix.user.security.CustomUserDetailsService;
+import com.streamix.user.security.JwtAccessDeniedHandler;
+import com.streamix.user.security.JwtAuthenticationEntryPoint;
 import com.streamix.user.security.JwtAuthenticationFilter;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -27,14 +29,21 @@ import static com.streamix.user.constant.SecurityConstant.ROLE_HIERARCHY;
 
 @Configuration
 @EnableWebSecurity
-@EnableMethodSecurity
+@EnableMethodSecurity(prePostEnabled = true)
 public class AuthConfig {
     private final CustomUserDetailsService customUserDetailsService;
     private final JwtAuthenticationFilter jwtAuthenticationFilter;
+    private final JwtAuthenticationEntryPoint jwtAuthenticationEntryPoint;
+    private final JwtAccessDeniedHandler jwtAccessDeniedHandler;
 
-    public AuthConfig(CustomUserDetailsService customUserDetailsService, JwtAuthenticationFilter jwtAuthenticationFilter) {
+    public AuthConfig(CustomUserDetailsService customUserDetailsService, 
+                      JwtAuthenticationFilter jwtAuthenticationFilter,
+                      JwtAuthenticationEntryPoint jwtAuthenticationEntryPoint,
+                      JwtAccessDeniedHandler jwtAccessDeniedHandler) {
         this.customUserDetailsService = customUserDetailsService;
         this.jwtAuthenticationFilter = jwtAuthenticationFilter;
+        this.jwtAuthenticationEntryPoint = jwtAuthenticationEntryPoint;
+        this.jwtAccessDeniedHandler = jwtAccessDeniedHandler;
     }
 
     @Bean
@@ -60,6 +69,10 @@ public class AuthConfig {
                 )
                 .headers(headers -> headers.frameOptions(HeadersConfigurer.FrameOptionsConfig::sameOrigin))
                 .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class)
+                .exceptionHandling(exceptions -> exceptions
+                        .authenticationEntryPoint(jwtAuthenticationEntryPoint)
+                        .accessDeniedHandler(jwtAccessDeniedHandler)
+                )
                 .build();
     }
 

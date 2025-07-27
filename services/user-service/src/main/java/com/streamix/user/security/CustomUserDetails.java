@@ -10,6 +10,8 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
+import static com.streamix.user.constant.SecurityConstant.DEFAULT_ROLE_PREFIX;
+
 public class CustomUserDetails implements UserDetails {
 
     private String email;
@@ -26,8 +28,7 @@ public class CustomUserDetails implements UserDetails {
         List<String> privileges = new ArrayList<>();
         List<Privilege> collection = new ArrayList<>();
         for (Role role : roles) {
-            // Add role with ROLE_ prefix for Spring Security hasRole() method
-            privileges.add("ROLE_" + role.getName());
+            privileges.add(DEFAULT_ROLE_PREFIX + role.getName());
             collection.addAll(role.getPrivileges());
         }
         for (Privilege item : collection) {

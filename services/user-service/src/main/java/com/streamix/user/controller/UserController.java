@@ -33,10 +33,9 @@ public class UserController {
     }
 
     @GetMapping("/private-test")
-    @PreAuthorize(" hasRole('ROLE_USER') ")
-    public void privateTest(Authentication authentication) {
-        String username = authentication.getName();
-        System.out.println("Private test accessed by user: " + username);
+    @PreAuthorize(" hasRole('USER') ")
+    public String privateTest(Authentication authentication) {
+        return authentication.getName();
     }
 
 }
