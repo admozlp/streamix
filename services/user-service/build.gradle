@@ -1,11 +1,11 @@
 apply from: '../../dependencies.gradle'
 
 dependencies {
-    implementation project(':streamix-common')
     implementation libs.eurekaClient
     implementation libs.springSecurity
     implementation libs.jpa
-    implementation libs.h2
+    implementation libs.postgresql
+    implementation project(':streamix-common')
 
     // JWT Support
     implementation libs.jwtApi
@@ -13,7 +13,7 @@ dependencies {
     runtimeOnly libs.jwtJackson
 
     // Flyway Migration
-    implementation libs.flayWay
+    runtimeOnly libs.flywayPostgres
 }
 
 dependencyManagement {
