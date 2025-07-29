@@ -293,6 +293,7 @@ yarn.lock
 .dynamodb/
 .tern-port
 
-gradlew
-gradlew.bat
-gradle/
+# Gradle wrapper files should NOT be ignored
+# gradlew
+# gradlew.bat
+# gradle/
