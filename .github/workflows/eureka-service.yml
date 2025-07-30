@@ -1,0 +1,35 @@
+name: Eureka Service Tests
+
+on:
+  push:
+    branches: [ main ]
+    paths:
+      - 'services/eureka-service/**'
+      - 'modules/common/**'
+      - 'dependencies.gradle'
+      - 'build.gradle'
+  pull_request:
+    branches: [ main ]
+    paths:
+      - 'services/eureka-service/**'
+      - 'modules/common/**'
+
+jobs:
+  test-eureka:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Download code
+        uses: actions/checkout@v4
+        
+      - name: Setup Java 21
+        uses: actions/setup-java@v4
+        with:
+          java-version: '21'
+          distribution: 'temurin'
+          
+      - name: Make gradlew executable
+        run: chmod +x gradlew
+
+      - name: Test Eureka Service
+        run: ./gradlew :eureka-service:test 
