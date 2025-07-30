@@ -46,13 +46,11 @@ jobs:
       - name: Get Latest Version from Docker Hub
         id: version
         run: |
-          # Docker Hub'daki son version'ı al
           LATEST_TAG=$(curl -s "https://registry.hub.docker.com/v2/repositories/${{ secrets.DOCKER_USERNAME }}/eureka-service/tags/?page_size=1" | \
             jq -r '.results[0].name // "0.0.0"' | grep -E '^[0-9]+\.[0-9]+\.[0-9]+$' || echo "0.0.0")
           
           echo "Current latest tag: $LATEST_TAG"
           
-          # Version'ı parse et ve bir artır
           if [ "$LATEST_TAG" = "0.0.0" ] || [ "$LATEST_TAG" = "null" ]; then
             NEW_VERSION="1.0.0"
           else
@@ -67,20 +65,17 @@ jobs:
 
       - name: Build and Push Docker Image
         run: |
-          # Local image build et
           docker build -t ${{ secrets.DOCKER_USERNAME }}/eureka-service:${{ steps.version.outputs.new_version }} \
             -f services/eureka-service/Dockerfile .
           
-          # Latest tag'i de ekle
           docker tag ${{ secrets.DOCKER_USERNAME }}/eureka-service:${{ steps.version.outputs.new_version }} \
             ${{ secrets.DOCKER_USERNAME }}/eureka-service:latest
           
-          # Docker Hub'a push et
           docker push ${{ secrets.DOCKER_USERNAME }}/eureka-service:${{ steps.version.outputs.new_version }}
           docker push ${{ secrets.DOCKER_USERNAME }}/eureka-service:latest
 
       - name: Show Pushed Images
         run: |
-          echo "✅ Successfully pushed:"
+          echo "Successfully pushed:"
           echo "🐳 ${{ secrets.DOCKER_USERNAME }}/eureka-service:${{ steps.version.outputs.new_version }}"
           echo "🐳 ${{ secrets.DOCKER_USERNAME }}/eureka-service:latest" 

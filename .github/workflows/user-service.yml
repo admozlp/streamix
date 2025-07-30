@@ -75,6 +75,6 @@ jobs:
 
       - name: Show Pushed Images
         run: |
-          echo "✅ Successfully pushed:"
+          echo "Successfully pushed:"
           echo "🐳 ${{ secrets.DOCKER_USERNAME }}/user-service:${{ steps.version.outputs.new_version }}"
           echo "🐳 ${{ secrets.DOCKER_USERNAME }}/user-service:latest" 

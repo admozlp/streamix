@@ -21,13 +21,13 @@ jobs:
     steps:
       - name: Download code
         uses: actions/checkout@v4
-        
+
       - name: Setup Java 21
         uses: actions/setup-java@v4
         with:
           java-version: '21'
           distribution: 'temurin'
-          
+
       - name: Make gradlew executable
         run: chmod +x gradlew
 
@@ -75,6 +75,6 @@ jobs:
 
       - name: Show Pushed Images
         run: |
-          echo "✅ Successfully pushed:"
+          echo "Successfully pushed:"
           echo "🐳 ${{ secrets.DOCKER_USERNAME }}/apigw-service:${{ steps.version.outputs.new_version }}"
           echo "🐳 ${{ secrets.DOCKER_USERNAME }}/apigw-service:latest" 
