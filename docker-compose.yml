@@ -1,24 +1,4 @@
 services:
-  # PostgreSQL Database
-  postgres:
-    image: postgres:15
-    container_name: streamix_postgres
-    environment:
-      POSTGRES_USER: admin
-      POSTGRES_PASSWORD: admin123
-      POSTGRES_DB: streamix_user
-    ports:
-      - "5432:5432"
-    volumes:
-      - postgres_data:/var/lib/postgresql/data
-    networks:
-      - streamix_network
-    healthcheck:
-      test: [ "CMD-SHELL", "pg_isready -U admin -d streamix_user" ]
-      interval: 10s
-      timeout: 5s
-      retries: 5
-
   # Eureka Service Discovery
   eureka-service:
     image: ademozalp4/eureka-service:latest
@@ -42,8 +22,6 @@ services:
     ports:
       - "8080"
     depends_on:
-      postgres:
-        condition: service_healthy
       eureka-service:
         condition: service_healthy
     networks:
@@ -71,8 +49,6 @@ services:
     depends_on:
       eureka-service:
         condition: service_healthy
-      user-service:
-        condition: service_healthy
     networks:
       - streamix_network
     environment:
@@ -87,9 +63,6 @@ services:
       start_period: 50s
     restart: on-failure
 
-volumes:
-  postgres_data:
-
 networks:
   streamix_network:
-    driver: bridge
+    external: true

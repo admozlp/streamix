@@ -101,5 +101,5 @@ jobs:
             mkdir -p /app
             cd /app
             sed -i "s|image: ${{ secrets.DOCKER_USERNAME }}/user-service:.*|image: ${{ secrets.DOCKER_USERNAME }}/user-service:${{ steps.version.outputs.new_version }}|" docker-compose.yml
-            docker compose pull user-service
-            docker compose up -d user-service
+            docker compose -p streamix pull user-service
+            docker compose -p streamix up -d --no-deps user-service

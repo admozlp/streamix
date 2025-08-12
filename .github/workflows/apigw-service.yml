@@ -101,5 +101,5 @@ jobs:
             mkdir -p /app
             cd /app
             sed -i "s|image: ${{ secrets.DOCKER_USERNAME }}/apigw-service:.*|image: ${{ secrets.DOCKER_USERNAME }}/apigw-service:${{ steps.version.outputs.new_version }}|" docker-compose.yml
-            docker compose pull apigw-service
-            docker compose up -d apigw-service
+            docker compose -p streamix pull apigw-service
+            docker compose -p streamix up -d --no-deps apigw-service
