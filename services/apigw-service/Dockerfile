@@ -54,5 +54,5 @@ HEALTHCHECK --interval=30s --timeout=3s --start-period=50s --retries=3 \
 # Set JVM options for container environment
 ENV JAVA_OPTS="-Xmx512m -Xms256m -XX:+UseG1GC -XX:+UseContainerSupport"
 
-# Run the application with dev profile
-ENTRYPOINT ["sh", "-c", "java $JAVA_OPTS -jar app.jar --spring.profiles.active=dev"] 
+# Run the application with prod profile
+ENTRYPOINT ["sh", "-c", "java $JAVA_OPTS -jar app.jar --spring.profiles.active=prod"]

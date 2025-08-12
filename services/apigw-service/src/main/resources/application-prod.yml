@@ -1,0 +1,9 @@
+### Eureka Configuration ###
+eureka:
+  instance:
+    preferIpAddress: true
+    instanceId: ${spring.application.name}:${server.port}:${random.value}
+  client:
+    serviceUrl:
+      defaultZone: ${EUREKA_URI}
+    registry-fetch-interval-seconds: 5

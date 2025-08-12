@@ -1,5 +1,9 @@
 name: API Gateway Service Tests
 
+concurrency:
+  group: deploy-server
+  cancel-in-progress: false
+
 on:
   push:
     branches: [ main ]
@@ -15,7 +19,8 @@ on:
       - 'modules/common/**'
 
 jobs:
-  test-apigw:
+  deploy-apigw:
+    name: Deploy API Gateway Service
     runs-on: ubuntu-latest
     
     steps:
@@ -78,3 +83,28 @@ jobs:
           echo "Successfully pushed:"
           echo "🐳 ${{ secrets.DOCKER_USERNAME }}/apigw-service:${{ steps.version.outputs.new_version }}"
           echo "🐳 ${{ secrets.DOCKER_USERNAME }}/apigw-service:latest" 
+
+      - name: Upload docker-compose.yml to server
+        uses: appleboy/scp-action@v0.1.7
+        with:
+          host: ${{ secrets.SERVER_HOST }}
+          username: ${{ secrets.SERVER_USER }}
+          key: ${{ secrets.SERVER_SSH_KEY }}
+          port: ${{ secrets.SERVER_PORT }}
+          source: "docker-compose.yml"
+          target: "/app"
+
+      - name: SSH Deploy to Server
+        uses: appleboy/ssh-action@v1.0.0
+        with:
+          host: ${{ secrets.SERVER_HOST }}
+          username: ${{ secrets.SERVER_USER }}
+          key: ${{ secrets.SERVER_SSH_KEY }}
+          port: ${{ secrets.SERVER_PORT }}
+          script: |
+            echo "🚀 Deploying apigw-service version: ${{ steps.version.outputs.new_version }}"
+            mkdir -p /app
+            cd /app
+            sed -i "s|image: ${{ secrets.DOCKER_USERNAME }}/apigw-service:.*|image: ${{ secrets.DOCKER_USERNAME }}/apigw-service:${{ steps.version.outputs.new_version }}|" docker-compose.yml
+            docker compose -p streamix pull apigw-service
+            docker compose -p streamix up -d --no-deps apigw-service

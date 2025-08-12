@@ -1,3 +1,21 @@
+spring:
+  # PostgreSQL Database Configuration
+  datasource:
+    url: ${SPRING_DATASOURCE_URL}
+    driver-class-name: org.postgresql.Driver
+    username: ${SPRING_DATASOURCE_USERNAME}
+    password: ${SPRING_DATASOURCE_PASSWORD}
+
+### Eureka Configuration ###
+eureka:
+  instance:
+    preferIpAddress: true
+    instanceId: ${spring.application.name}:${server.port}:${random.value}
+  client:
+    serviceUrl:
+      defaultZone: ${EUREKA_URI}
+    registry-fetch-interval-seconds: 5
+
 logging:
   level:
     root: warn
