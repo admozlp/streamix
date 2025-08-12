@@ -2,7 +2,6 @@ services:
   # Eureka Service Discovery
   eureka-service:
     image: ademozalp4/eureka-service:latest
-    container_name: eureka-service
     ports:
       - "8761:8761"
     networks:
@@ -18,7 +17,6 @@ services:
   # User Service
   user-service:
     image: ademozalp4/user-service:latest
-    container_name: streamix-user-service
     ports:
       - "8080"
     depends_on:
@@ -43,7 +41,6 @@ services:
   # API Gateway Service
   apigw-service:
     image: ademozalp4/apigw-service:latest
-    container_name: streamix-apigw-service
     ports:
       - "9100:9100"
     depends_on:
