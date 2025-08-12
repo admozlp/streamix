@@ -1,5 +1,9 @@
 name: Eureka Service Tests
 
+concurrency:
+  group: deploy-server
+  cancel-in-progress: false
+
 on:
   push:
     branches: [ main ]
@@ -15,7 +19,8 @@ on:
       - 'modules/common/**'
 
 jobs:
-  test-eureka:
+  deploy-eureka:
+    name: Deploy Eureka Service
     runs-on: ubuntu-latest
     
     steps:

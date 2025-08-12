@@ -9,6 +9,7 @@ import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 public class ApigwApplication {
 
     public static void main(String[] args) {
+        // test
         SpringApplication.run(ApigwApplication.class, args);
     }
 }
