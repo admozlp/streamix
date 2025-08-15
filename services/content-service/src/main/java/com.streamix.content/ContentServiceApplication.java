@@ -9,6 +9,7 @@ import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 @EnableDiscoveryClient
 public class ContentServiceApplication {
     public static void main(String[] args) {
+        // test
         SpringApplication.run(ContentServiceApplication.class, args);
     }
 }
