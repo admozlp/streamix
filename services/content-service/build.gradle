@@ -7,11 +7,6 @@ dependencies {
     implementation libs.postgresql
     implementation project(':common')
 
-    // JWT Support
-    implementation libs.jwtApi
-    runtimeOnly libs.jwtImpl
-    runtimeOnly libs.jwtJackson
-
     // Flyway Migration
     runtimeOnly libs.flywayPostgres
 }
@@ -20,4 +15,4 @@ dependencyManagement {
     imports {
         mavenBom libs.springCloud
     }
-} 
+}

@@ -1,0 +1,28 @@
+spring:
+  # PostgreSQL Database Configuration
+  datasource:
+    url: jdbc:postgresql://localhost:5432/streamix_content
+    driver-class-name: org.postgresql.Driver
+    username: admin
+    password: admin123
+
+  # JPA Configuration
+  jpa:
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+    hibernate:
+      ddl-auto: none
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+
+
+### Eureka Configuration ###
+eureka:
+  instance:
+    preferIpAddress: true
+    instanceId: ${spring.application.name}:${server.port}:${random.value}
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8761/eureka/
+    registry-fetch-interval-seconds: 5

@@ -1,12 +1,14 @@
 rootProject.name = 'streamix'
-
-include 'streamix-common'
-include 'eureka-service'
-include 'user-service'
-include 'apigw-service'
+include 'common'
+include 'eureka'
+include 'user'
+include 'apigw'
+include 'content'
 
 // Module Path Configuration
-project(':streamix-common').projectDir = file('modules/common')
-project(':eureka-service').projectDir = file('services/eureka-service')
-project(':user-service').projectDir = file('services/user-service')
-project(':apigw-service').projectDir = file('services/apigw-service')
+project(':common').projectDir = file('modules/common')
+project(':eureka').projectDir = file('services/eureka-service')
+project(':user').projectDir = file('services/user-service')
+project(':apigw').projectDir = file('services/apigw-service')
+project(':content').projectDir = file('services/content-service')
+

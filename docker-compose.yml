@@ -60,6 +60,30 @@ services:
       start_period: 50s
     restart: on-failure
 
+  # Content Service
+  content-service:
+    image: ademozalp4/content-service:latest
+    ports:
+      - "8080"
+    depends_on:
+      eureka-service:
+        condition: service_healthy
+    networks:
+      - streamix_network
+    environment:
+      SPRING_PROFILES_ACTIVE: prod
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/streamix_content
+      SPRING_DATASOURCE_USERNAME: admin
+      SPRING_DATASOURCE_PASSWORD: admin123
+      EUREKA_URI: http://eureka-service:8761/eureka/
+    healthcheck:
+      test: [ "CMD", "curl", "-f", "http://localhost:8080/actuator/health" ]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+    restart: on-failure
+
 networks:
   streamix_network:
     external: true
