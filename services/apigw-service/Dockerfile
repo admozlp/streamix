@@ -22,7 +22,7 @@ COPY services/apigw-service/ services/apigw-service/
 RUN chmod +x gradlew
 
 # Build the application (skip tests for faster build)
-RUN ./gradlew :apigw-service:build -x test
+RUN ./gradlew :apigw:build -x test
 
 # Runtime stage
 FROM eclipse-temurin:21-jre AS runtime

@@ -22,7 +22,7 @@ COPY services/eureka-service/ services/eureka-service/
 RUN chmod +x gradlew
 
 # Build the application (skip tests for faster build)
-RUN ./gradlew :eureka-service:build -x test
+RUN ./gradlew :eureka:build -x test
 
 # Runtime stage
 FROM eclipse-temurin:21-jre AS runtime
