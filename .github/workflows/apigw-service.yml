@@ -53,19 +53,36 @@ jobs:
         shell: bash
         run: |
           set -e
-          LATEST_TAG=$(curl -s "https://registry.hub.docker.com/v2/repositories/${{ secrets.DOCKER_USERNAME }}/apigw-service/tags/?page_size=100" \
-            | jq -r '.results[].name' \
-            | grep -E '^[0-9]+\.[0-9]+\.[0-9]+$' \
-            | sort -V | tail -1)
-          if [[ -z "$LATEST_TAG" ]]; then
-            NEW_VERSION="1.0.0"
+          echo "🔍 Checking Docker Hub for existing tags..."
+          
+          # Try to fetch tags, but handle errors gracefully
+          RESPONSE=$(curl -s -w "%{http_code}" "https://registry.hub.docker.com/v2/repositories/${{ secrets.DOCKER_USERNAME }}/apigw-service/tags/?page_size=100" || echo "000")
+          HTTP_CODE="${RESPONSE: -3}"
+          RESPONSE_BODY="${RESPONSE%???}"
+          
+          if [[ "$HTTP_CODE" == "200" ]] && [[ -n "$RESPONSE_BODY" ]]; then
+            echo "✅ Successfully fetched tags from Docker Hub"
+            # Fetch all tags, keep only x.y.z, pick highest semver
+            LATEST_TAG=$(echo "$RESPONSE_BODY" | jq -r '.results[].name' 2>/dev/null | grep -E '^[0-9]+\.[0-9]+\.[0-9]+$' | sort -V | tail -1 || echo "")
+            
+            if [[ -n "$LATEST_TAG" ]]; then
+              echo "📋 Found latest tag: $LATEST_TAG"
+              IFS='.' read -r MAJOR MINOR PATCH <<< "$LATEST_TAG"
+              PATCH=$((PATCH+1))
+              NEW_VERSION="$MAJOR.$MINOR.$PATCH"
+            else
+              echo "📋 No semantic version tags found, starting with 1.0.0"
+              NEW_VERSION="1.0.0"
+            fi
           else
-            IFS='.' read -r MAJOR MINOR PATCH <<< "$LATEST_TAG"
-            PATCH=$((PATCH+1))
-            NEW_VERSION="$MAJOR.$MINOR.$PATCH"
+            echo "⚠️  Could not fetch tags from Docker Hub (HTTP: $HTTP_CODE), starting with 1.0.0"
+            echo "📋 This might be the first deployment or a temporary issue"
+            NEW_VERSION="1.0.0"
           fi
+          
+          echo "latest_semver=${LATEST_TAG:-none}"
           echo "new_version=$NEW_VERSION" >> $GITHUB_OUTPUT
-          echo "New version: $NEW_VERSION"
+          echo "🚀 New version will be: $NEW_VERSION"
 
       - name: Build and Push Docker Image
         run: |
@@ -106,5 +123,13 @@ jobs:
             mkdir -p /app
             cd /app
             sed -i "s|image: ${{ secrets.DOCKER_USERNAME }}/apigw-service:.*|image: ${{ secrets.DOCKER_USERNAME }}/apigw-service:${{ steps.version.outputs.new_version }}|" docker-compose.yml
-            docker compose -p streamix pull apigw-service
+            
+            # Try to pull the image, but don't fail if it doesn't exist yet
+            echo "🔄 Pulling apigw-service image..."
+            if docker compose -p streamix pull apigw-service; then
+              echo "✅ Image pulled successfully"
+            else
+              echo "⚠️  Image not found in registry, will build locally if needed"
+            fi
+            
             docker compose -p streamix up -d --no-deps apigw-service
