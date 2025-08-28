@@ -3,7 +3,7 @@ package com.streamix.user.converter;
 import com.streamix.user.dto.LoginResponse;
 import com.streamix.user.dto.UserResponse;
 import com.streamix.user.model.User;
-import com.streamix.user.security.CustomUserDetails;
+import com.streamix.user.service.security.CustomUserDetails;
 
 public class UserConverter {
     private UserConverter() {

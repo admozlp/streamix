@@ -1,4 +1,4 @@
-package com.streamix.user.security;
+package com.streamix.user.service.security;
 
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;

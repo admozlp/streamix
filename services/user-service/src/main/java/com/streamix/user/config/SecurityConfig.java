@@ -1,9 +1,9 @@
 package com.streamix.user.config;
 
-import com.streamix.user.security.CustomUserDetailsService;
-import com.streamix.user.security.JwtAccessDeniedHandler;
-import com.streamix.user.security.JwtAuthenticationEntryPoint;
-import com.streamix.user.security.JwtAuthenticationFilter;
+import com.streamix.user.service.security.CustomUserDetailsService;
+import com.streamix.user.service.security.JwtAccessDeniedHandler;
+import com.streamix.user.service.security.JwtAuthenticationEntryPoint;
+import com.streamix.user.service.security.JwtAuthenticationFilter;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.access.hierarchicalroles.RoleHierarchy;
@@ -29,17 +29,17 @@ import static com.streamix.user.constant.SecurityConstant.ROLE_HIERARCHY;
 
 @Configuration
 @EnableWebSecurity
-@EnableMethodSecurity(prePostEnabled = true)
-public class AuthConfig {
+@EnableMethodSecurity
+public class SecurityConfig {
     private final CustomUserDetailsService customUserDetailsService;
     private final JwtAuthenticationFilter jwtAuthenticationFilter;
     private final JwtAuthenticationEntryPoint jwtAuthenticationEntryPoint;
     private final JwtAccessDeniedHandler jwtAccessDeniedHandler;
 
-    public AuthConfig(CustomUserDetailsService customUserDetailsService, 
-                      JwtAuthenticationFilter jwtAuthenticationFilter,
-                      JwtAuthenticationEntryPoint jwtAuthenticationEntryPoint,
-                      JwtAccessDeniedHandler jwtAccessDeniedHandler) {
+    public SecurityConfig(CustomUserDetailsService customUserDetailsService,
+                          JwtAuthenticationFilter jwtAuthenticationFilter,
+                          JwtAuthenticationEntryPoint jwtAuthenticationEntryPoint,
+                          JwtAccessDeniedHandler jwtAccessDeniedHandler) {
         this.customUserDetailsService = customUserDetailsService;
         this.jwtAuthenticationFilter = jwtAuthenticationFilter;
         this.jwtAuthenticationEntryPoint = jwtAuthenticationEntryPoint;

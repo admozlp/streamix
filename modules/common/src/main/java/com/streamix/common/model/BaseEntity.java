@@ -1,7 +1,10 @@
 package com.streamix.common.model;
 
 import jakarta.persistence.*;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedDate;
 
+import java.time.LocalDateTime;
 import java.util.UUID;
 
 @MappedSuperclass
@@ -12,6 +15,13 @@ public class BaseEntity {
     private UUID id;
 
     private boolean deleted;
+
+    @CreatedDate
+    @Column(nullable = false, updatable = false)
+    private LocalDateTime created;
+
+    @LastModifiedDate
+    private LocalDateTime modified;
 
     public BaseEntity(UUID id, boolean deleted) {
         this.id = id;

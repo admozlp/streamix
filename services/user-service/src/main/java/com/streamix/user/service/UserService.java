@@ -10,7 +10,7 @@ import com.streamix.user.dto.UserResponse;
 import com.streamix.user.model.Role;
 import com.streamix.user.model.User;
 import com.streamix.user.repository.UserRepository;
-import com.streamix.user.security.JwtUtil;
+import com.streamix.user.service.security.JwtUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.security.authentication.AuthenticationManager;

@@ -1,4 +1,4 @@
-package com.streamix.user.security;
+package com.streamix.user.service.security;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.JwtException;

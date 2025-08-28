@@ -1,5 +1,5 @@
 -- Insert initial roles
-INSERT INTO roles (name, deleted) VALUES
-('ADMIN', false),
-('MODERATOR', false),
-('USER', false); 
+INSERT INTO roles (name, deleted, created, modified) VALUES
+('ADMIN', false, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+('MODERATOR', false, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+('USER', false, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP); 

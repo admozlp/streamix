@@ -1,4 +1,4 @@
-package com.streamix.user.security;
+package com.streamix.user.service.security;
 
 import com.streamix.user.model.Privilege;
 import com.streamix.user.model.Role;
